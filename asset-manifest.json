@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/PhoneBookPET/static/css/main.7acaea2f.css",
+    "main.js": "/PhoneBookPET/static/js/main.07d3183d.js",
+    "index.html": "/PhoneBookPET/index.html",
+    "main.7acaea2f.css.map": "/PhoneBookPET/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/PhoneBookPET/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
