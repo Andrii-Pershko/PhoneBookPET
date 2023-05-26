@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useCurrentUserQuery } from 'redux/UsersApi/usersApi';
 // import { selectIsLoggedIn } from 'redux/selectors';

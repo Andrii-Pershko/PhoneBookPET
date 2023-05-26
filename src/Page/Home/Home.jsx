@@ -1,9 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import css from './Home.module.css';
-import {
-  useCurrentUserQuery,
-  useLogoutMutation,
-} from 'redux/UsersApi/usersApi';
+import { useLogoutMutation } from 'redux/UsersApi/usersApi';
 
 export const Home = ({ isSuccess }) => {
   const navigate = useNavigate();

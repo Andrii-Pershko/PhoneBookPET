@@ -1,10 +1,7 @@
 import css from './SignUp.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { register } from 'redux/operations';
 import { object, string } from 'yup';
-// import { useAddUserMutation } from 'redux/contactsBookAPI';
 
 const initialValue = {
   name: '',
