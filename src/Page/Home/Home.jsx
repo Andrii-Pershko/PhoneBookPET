@@ -1,0 +1,68 @@
+import { useNavigate } from 'react-router-dom';
+import css from './Home.module.css';
+import {
+  useCurrentUserQuery,
+  useLogoutMutation,
+} from 'redux/UsersApi/usersApi';
+
+export const Home = ({ isSuccess }) => {
+  const navigate = useNavigate();
+
+  const [logOut] = useLogoutMutation();
+
+  const handleLogout = () => {
+    logOut();
+  };
+
+  if (isSuccess) {
+    return (
+      <section className={css.sectionHome}>
+        <div className={css.homeBox}>
+          <h1>are authorized!</h1>
+          <p>you can</p>
+          <div className={css.buttonBox}>
+            <button
+              className={css.button}
+              onClick={() => navigate('/contacts', { replace: true })}
+            >
+              Go to Contacts
+            </button>
+            <p className={css.pusher}>or</p>
+            <button
+              className={`${css.button} ${css.buttonOut}`}
+              onClick={handleLogout}
+            >
+              LogOut
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <>
+      <section className={css.sectionHome}>
+        <div className={css.homeBox}>
+          <h1>Welcome to contact book app</h1>
+          <p>you can</p>
+          <div className={css.buttonBox}>
+            <button
+              className={css.button}
+              onClick={() => navigate('/registration', { replace: true })}
+            >
+              Sign Up
+            </button>
+            <p className={css.pusher}>or</p>
+            <button
+              className={css.button}
+              onClick={() => navigate('/login', { replace: true })}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
