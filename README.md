@@ -18,3 +18,5 @@ the following technologies are used: React, Redux Toolkit, axios, Rest API. Used
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzLfEaHVvkEUwRD5QkOqecDdVNrutxM5sVQA&usqp=CAU"" width="50%"></p>
 
 # Project functionality
+
+`Home page` ![Home_page](./assets/home.png)
