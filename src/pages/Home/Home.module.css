@@ -43,13 +43,14 @@ h1 {
 
 .homeBox {
     border: 2px solid rgb(91, 218, 154);
-    border-radius: 50px;
+    border-radius: 40px;
     display: inline-block;
     flex-direction: column;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     padding: 40px;
+    width: 300px;
 }
 
 .sectionHome {

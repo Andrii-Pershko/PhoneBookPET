@@ -45,9 +45,9 @@ export const Home = () => {
 
   return (
     <>
+      <h1>Welcome to contact book app</h1>
       <section className={css.sectionHome}>
         <div className={css.homeBox}>
-          <h1>Welcome to contact book app</h1>
           <p style={{ marginBottom: '10px', fontSize: '22px' }}>You can</p>
           <div className={css.buttonBox}>
             <button
