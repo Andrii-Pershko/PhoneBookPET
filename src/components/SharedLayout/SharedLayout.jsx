@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from 'redux/selectors.js';
 
 export const SharedLayout = () => {
+  
   const isLogin = useSelector(selectIsLoggedIn);
+
   return (
     <Container>
       <Header>

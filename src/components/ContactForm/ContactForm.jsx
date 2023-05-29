@@ -3,10 +3,12 @@ import { object, string } from 'yup';
 import css from './ContactForm.module.css';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
-// import { useAddContactMutation, useGetContactsQuery } from 'redux/contactsApi';
-// import { addContacts } from 'reduxCopy/contactsSlice';
+
+Notiflix.Notify.init({
+  timeout: 1000,
+});
 
 // initial значення для бібліотеки formik
 const initialValues = {
@@ -27,7 +29,7 @@ let userSchema = object().shape({
 });
 
 export function ContactForm() {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = ({ name, number }, action) => {

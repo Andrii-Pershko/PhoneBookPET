@@ -2,34 +2,18 @@ import Notiflix from 'notiflix';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/operations';
-import { getContacts, selectFilterField } from 'redux/selectors';
+import { selectContacts, selectFilteredContacts } from 'redux/selectors';
 import css from './ContactList.module.css';
+import { numberEditing } from 'utils/numberEditing';
 
 export default function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
+  const filteredContacts = useSelector(selectFilteredContacts);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-  const editingNumber = number =>
-    '(' +
-    number.slice(0, 3) +
-    ')' +
-    ' ' +
-    number.slice(3, 6) +
-    ' ' +
-    number.slice(6, 8) +
-    ' ' +
-    number.slice(8);
-  // беремо значення поля find contacts
-  const filterValue = useSelector(selectFilterField);
-
-  // фільтруємо масив якщо було змінено значення поля find contacts
-  const filteredContacts = () =>
-    contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filterValue)
-    );
 
   return (
     <>
@@ -37,7 +21,7 @@ export default function ContactList() {
         <div>You not have contcts</div>
       ) : (
         <ol>
-          {filteredContacts().map(({ name, number, id }, index) => (
+          {filteredContacts.map(({ name, number, id }, index) => (
             <li key={id} style={{ width: '500px' }}>
               <span
                 style={{
@@ -48,7 +32,7 @@ export default function ContactList() {
               >
                 {index + 1}. {name}
               </span>
-              <span className={css.number}> {editingNumber(number)}</span>
+              <span className={css.number}> {numberEditing(number)}</span>
               <button
                 type="button"
                 id={id}

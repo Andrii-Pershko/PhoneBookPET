@@ -10,8 +10,6 @@ export const Home = () => {
   const dispatch = useDispatch();
   const nameUser = useSelector(selectUser);
 
-  console.log('nameUser', nameUser);
-
   const handleLogout = () => {
     dispatch(logOut());
   };

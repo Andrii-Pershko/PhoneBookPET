@@ -10,18 +10,26 @@ import { Contacts } from 'pages/Contacts/Contacts';
 import { PrivateRoute } from './PrivateRoute';
 import { PageNotFound } from 'pages/PageNotFound';
 import { RestrictedRoute } from './RestrictedRoute';
+import { selectIsRefreshing } from 'redux/selectors';
+import { RingLoader } from 'react-spinners';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isrefresh = useSelector(state => state.auth.isRefreshing);
+  const isRefresh = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    console.log('here');
     dispatch(refreshUser());
   }, [dispatch]);
 
-  if (isrefresh) {
-    return <div>Loading...</div>;
+  if (isRefresh) {
+    return (
+      <RingLoader
+        cssOverride={{
+          margin: '50px auto',
+        }}
+        color="#00de52"
+      />
+    );
   } else {
     return (
       <Routes>

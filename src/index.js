@@ -8,13 +8,13 @@ import { persistor, store } from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <PersistGate loading={null} persistor={persistor}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
       <React.StrictMode>
         <BrowserRouter basename="/PhoneBookPET">
           <App />
         </BrowserRouter>
       </React.StrictMode>
-    </Provider>
-  </PersistGate>
+    </PersistGate>
+  </Provider>
 );
