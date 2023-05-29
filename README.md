@@ -24,4 +24,14 @@ Used technologies
 
 ![Home_page](./assets/home.png)
 
-`Registration` page ![Home_page](./assets/sign_up.png)
+### `Registration` page
+
+![Home_page](./assets/sign_up.png)
+
+### `Login` page
+
+![Home_page](./assets/login.png)
+
+### `Authorized home` page
+
+![Home_page](./assets/home_authorized.png)
