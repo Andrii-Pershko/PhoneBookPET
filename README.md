@@ -4,9 +4,10 @@ This project was created to demonstrate technical skills in React and the
 ability to register and log in to the site.
 
 <h2>
+Used technologies
+</h2>
 In the project
 the following technologies are used: React, Redux Toolkit, axios, Rest API. Used backend <a href='https://connections-api.herokuapp.com/docs/#/' target="_blank">herokuapp</a>
-</h2>
 
 <p align="center">
 <img src="https://media.tproger.ru/uploads/2016/10/reactmini.png" width="50%"></p>
