@@ -17,4 +17,4 @@ the following technologies are used: React, Redux Toolkit, axios, Rest API. Used
 <p align="center">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzLfEaHVvkEUwRD5QkOqecDdVNrutxM5sVQA&usqp=CAU"" width="50%"></p>
 
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started)
+# Project functionality

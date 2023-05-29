@@ -9,7 +9,7 @@ export const SharedLayout = () => {
   return (
     <Container>
       <Header>
-        <Logo>You Contacts Book</Logo>
+        <Logo>You Phonebook</Logo>
         <nav>
           <Link to="/" end>
             Home
