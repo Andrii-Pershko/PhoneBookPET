@@ -8,7 +8,6 @@ import {
   refreshUsersFulfilled,
   refreshUsersReject,
   registerFulfilled,
-  registerPending,
 } from './sliceFunctions';
 
 const initialState = {
@@ -26,7 +25,6 @@ const authSlice = createSlice({
     builder
       .addCase(refreshUser.fulfilled, refreshUsersFulfilled)
       .addCase(refreshUser.rejected, refreshUsersReject)
-      .addCase(register.pending, registerPending)
       .addCase(register.fulfilled, registerFulfilled)
       .addCase(logIn.fulfilled, loginFulfilled)
       .addCase(logIn.pending, loginPending)

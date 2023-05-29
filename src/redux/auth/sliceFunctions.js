@@ -17,8 +17,6 @@ export const registerFulfilled = (state, action) => {
   state.error = false;
 };
 
-export const registerPending = state => {};
-
 export const loginFulfilled = (state, action) => {
   state.isLoggedIn = true;
   state.isRefreshing = false;

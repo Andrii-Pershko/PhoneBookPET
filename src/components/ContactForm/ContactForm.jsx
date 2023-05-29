@@ -18,10 +18,10 @@ const initialValues = {
 let userSchema = object().shape({
   name: string().min(2).required(),
   number: string()
-    .min(10, '10 number not with space: 0679543102')
+    .min(10, '10 number without space: 0679543102')
     .matches(
       /^((\(\d{3}\)?)|(\d{3}))?\d{3}\d{4}$/,
-      '10 number not with space: 0679543102'
+      '10 number without space: 0679543102'
     )
     .required(),
 });
@@ -58,13 +58,23 @@ export function ContactForm() {
       <Form autoComplete="off">
         <label className={css.labelBox}>
           <p>Name</p>
-          <Field className={'input'} type="text" name="name" />
+          <Field
+            className={'input'}
+            type="text"
+            name="name"
+            placeholder="name"
+          />
           <ErrorMessage component="p" className={css.nameError} name="name" />
         </label>
 
         <label className={css.labelBox}>
           <p>Phone</p>
-          <Field type="tel" name="number" />
+          <Field
+            type="tel"
+            name="number"
+            placeholder="number"
+            title="10 number without space: 0679543102"
+          />
           <ErrorMessage component="p" className={css.nameError} name="number" />
         </label>
 

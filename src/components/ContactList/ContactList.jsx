@@ -12,7 +12,16 @@ export default function ContactList() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
+  const editingNumber = number =>
+    '(' +
+    number.slice(0, 3) +
+    ')' +
+    ' ' +
+    number.slice(3, 6) +
+    ' ' +
+    number.slice(6, 8) +
+    ' ' +
+    number.slice(8);
   // беремо значення поля find contacts
   const filterValue = useSelector(selectFilterField);
 
@@ -39,7 +48,7 @@ export default function ContactList() {
               >
                 {index + 1}. {name}
               </span>
-              <span className={css.number}>{number}</span>
+              <span className={css.number}> {editingNumber(number)}</span>
               <button
                 type="button"
                 id={id}
