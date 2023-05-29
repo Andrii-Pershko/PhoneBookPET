@@ -1,22 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 import css from './Home.module.css';
-import { useLogoutMutation } from 'redux/UsersApi/usersApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLoggedIn, selectUser } from 'redux/selectors';
+import { logOut } from 'redux/operations';
 
-export const Home = ({ isSuccess }) => {
+export const Home = () => {
   const navigate = useNavigate();
+  const isLogin = useSelector(selectIsLoggedIn);
+  const dispatch = useDispatch();
+  const nameUser = useSelector(selectUser);
 
-  const [logOut] = useLogoutMutation();
+  console.log('nameUser', nameUser);
 
   const handleLogout = () => {
-    logOut();
+    dispatch(logOut());
   };
 
-  if (isSuccess) {
+  if (isLogin) {
     return (
       <section className={css.sectionHome}>
         <div className={css.homeBox}>
-          <h1>are authorized!</h1>
-          <p>you can</p>
+          <h1>{nameUser.name} you are authorized!</h1>
+          <p>You can</p>
           <div className={css.buttonBox}>
             <button
               className={css.button}
@@ -26,10 +31,11 @@ export const Home = ({ isSuccess }) => {
             </button>
             <p className={css.pusher}>or</p>
             <button
+              style={{ width: '176px' }}
               className={`${css.button} ${css.buttonOut}`}
               onClick={handleLogout}
             >
-              LogOut
+              Logout
             </button>
           </div>
         </div>
@@ -42,7 +48,7 @@ export const Home = ({ isSuccess }) => {
       <section className={css.sectionHome}>
         <div className={css.homeBox}>
           <h1>Welcome to contact book app</h1>
-          <p>you can</p>
+          <p style={{ marginBottom: '10px', fontSize: '22px' }}>You can</p>
           <div className={css.buttonBox}>
             <button
               className={css.button}
@@ -52,6 +58,7 @@ export const Home = ({ isSuccess }) => {
             </button>
             <p className={css.pusher}>or</p>
             <button
+              style={{ width: '108px' }}
               className={css.button}
               onClick={() => navigate('/login', { replace: true })}
             >

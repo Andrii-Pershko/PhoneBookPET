@@ -1,41 +1,53 @@
 import { Route, Routes } from 'react-router-dom';
-import { Home } from '../Page/Home/Home';
+import { SignUp } from '../pages/SingUp/SignUp';
 import { SharedLayout } from './SharedLayout/SharedLayout';
-import { RestrictedRoute } from './route/RestrictedRoute';
-import { Login } from 'Page/Login/Login';
-import { SignUp } from 'Page/SingUp/SignUp';
-import { PrivateRoute } from './route/PrivateRoute';
-import { Contacts } from 'Page/Contacts/Contacts';
-import { useCurrentUserQuery } from 'redux/UsersApi/usersApi';
+import { Home } from '../pages/Home/Home';
+import { Login } from 'pages/Login/Login';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshUser } from 'redux/operations';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { PrivateRoute } from './PrivateRoute';
+import { PageNotFound } from 'pages/PageNotFound';
+import { RestrictedRoute } from './RestrictedRoute';
 
 export const App = () => {
-  const data = useCurrentUserQuery();
-  console.log('auth', data);
+  const dispatch = useDispatch();
+  const isrefresh = useSelector(state => state.auth.isRefreshing);
 
-  if (data.isLoading) {
+  useEffect(() => {
+    console.log('here');
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  if (isrefresh) {
     return <div>Loading...</div>;
+  } else {
+    return (
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<Home />} />
+
+          <Route
+            path="/registration"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<SignUp />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+
+          <Route
+            path="/contacts"
+            element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
+      </Routes>
+    );
   }
-  return (
-    <Routes>
-      <Route path="/" element={<SharedLayout isSuccess={data.isSuccess} />}>
-        <Route index element={<Home isSuccess={data.isSuccess} />} />
-        <Route
-          path="/registration"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<SignUp />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={<PrivateRoute redirectTo="/" component={<Contacts />} />}
-        />
-      </Route>
-    </Routes>
-  );
 };

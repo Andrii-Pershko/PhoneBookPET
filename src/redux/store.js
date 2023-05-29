@@ -1,13 +1,41 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { usersApi } from './UsersApi/usersApi';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+import { authReducer } from './auth/slicesAuth';
+import { filterReducer } from './contacts/filterSlice';
+import { phonebookReducer } from './contacts/phoneBook';
+
+// Persisting token field from auth slice to localstorage
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 export const store = configureStore({
   reducer: {
-    // Add the generated reducer as a specific top-level slice
-    [usersApi.reducerPath]: usersApi.reducer,
+    auth: persistReducer(authPersistConfig, authReducer),
+    contacts: phonebookReducer,
+    filter: filterReducer,
   },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
+
+  devTools: process.env.NODE_ENV === 'development',
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(usersApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);

@@ -1,17 +1,17 @@
-import css from './SignUp.module.css';
+import css from '../SingUp/SignUp.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { logIn } from 'redux/operations';
 import { object, string } from 'yup';
 
 const initialValue = {
-  name: '',
   email: '',
   password: '',
-  checkPassword: '',
 };
 
 let userSchema = object().shape({
-  name: string().min(2).required(),
   email: string().email().required(),
   password: string()
     .matches(
@@ -19,29 +19,30 @@ let userSchema = object().shape({
       '6 symbol with min 1 number and 1 letter'
     )
     .required(),
-  checkPassword: string().required(),
 });
 
-export const SignUp = () => {
+export const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (
-    { name, email, password, checkPassword },
-    action
-  ) => {
-    if (password !== checkPassword) {
-      alert('Паролі не співпадають');
-      return;
-    }
+  const handleSubmit = async ({ email, password }) => {
+    const res = await dispatch(
+      logIn({
+        email,
+        password,
+      })
+    );
 
-    // dispatch(register({ name, email, password }));
-    navigate('/', { replace: true });
-    action.resetForm();
+    if (res.meta.requestStatus === 'rejected') {
+      alert('User not found, check email or password');
+    } else if (res.meta.requestStatus === 'fulfilled') {
+      navigate('/', { replace: true });
+    }
   };
 
   return (
     <>
-      <h1>Hello SignUp</h1>
+      <h1>Hello, login</h1>
       <Formik
         initialValues={initialValue}
         onSubmit={handleSubmit}
@@ -49,14 +50,8 @@ export const SignUp = () => {
       >
         <Form autoComplete="off">
           <label className={css.labelBox}>
-            <p>Name</p>
-            <Field type="text" name="name" />
-            <ErrorMessage component="p" className={css.nameError} name="name" />
-          </label>
-
-          <label className={css.labelBox}>
             <p>Email</p>
-            <Field type="email" name="email" />
+            <Field className={'input'} type="email" name="email" />
             <ErrorMessage
               component="p"
               className={css.nameError}
@@ -73,23 +68,15 @@ export const SignUp = () => {
               name="password"
             />
           </label>
-          <label className={css.labelBox}>
-            <p>Check password</p>
-            <Field type="password" name="checkPassword" />
-            <ErrorMessage
-              component="p"
-              className={css.nameError}
-              name="checkPassword"
-            />
-          </label>
-          <button type="submit">Registration</button>
+
+          <button type="submit">Login</button>
           <button
             type="button"
             onClick={() => {
-              navigate('/login', { replace: true });
+              navigate('/registration', { replace: true });
             }}
           >
-            Login
+            SignUp
           </button>
         </Form>
       </Formik>

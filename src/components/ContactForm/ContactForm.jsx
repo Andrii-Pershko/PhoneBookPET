@@ -2,7 +2,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
 import css from './ContactForm.module.css';
 import Notiflix from 'notiflix';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 // import { useAddContactMutation, useGetContactsQuery } from 'redux/contactsApi';
 // import { addContacts } from 'reduxCopy/contactsSlice';
 
@@ -16,17 +18,31 @@ const initialValues = {
 let userSchema = object().shape({
   name: string().min(2).required(),
   number: string()
-    .min(10, '10 number not with space: 067 954 310')
+    .min(10, '10 number not with space: 0679543102')
     .matches(
       /^((\(\d{3}\)?)|(\d{3}))?\d{3}\d{4}$/,
-      '10 number not with space: 067 954 310'
+      '10 number not with space: 0679543102'
     )
     .required(),
 });
 
 export function ContactForm() {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
   const handleSubmit = ({ name, number }, action) => {
+    if (name.length > 25) {
+      alert('The length of the name should not exceed 25 characters');
+      return;
+    }
     //якщо імя повторюється випливає попередження
+    if (contacts.find(contact => contact.name === name) !== undefined) {
+      Notiflix.Notify.failure(`${name} already in your contact book`);
+      return;
+    }
+
+    dispatch(addContact({ name, number }));
+    // якщо не повторюється додаємо та робимо алерт про новий контакт
 
     Notiflix.Notify.success(`You added ${name} to phonebook`);
     //скидання полів форми
@@ -52,7 +68,7 @@ export function ContactForm() {
           <ErrorMessage component="p" className={css.nameError} name="number" />
         </label>
 
-        <button type="submit">addContact</button>
+        <button type="submit">Add contact</button>
       </Form>
     </Formik>
   );
