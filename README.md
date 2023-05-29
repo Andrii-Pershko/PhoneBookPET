@@ -32,6 +32,16 @@ Used technologies
 
 ![Home_page](./assets/login.png)
 
-### `Authorized home` page
+### In `authorized home` page you can go to contact or log out of the account
 
 ![Home_page](./assets/home_authorized.png)
+
+### In `contacts` page you can `add new contact`, `delete` exist contact and `filter` you contact list
+
+![Home_page](./assets/phonebook_contacts.png.png)
+
+### If you enter the wrong address in the address bar, you will be redirected to the information page where it is written that the `page was not found`
+
+![Home_page](./assets/not_found_page.png.png)
+
+## Thank you for visiting my project and this repository
