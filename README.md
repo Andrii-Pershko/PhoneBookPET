@@ -6,8 +6,8 @@ ability to register and log in to the site.
 <h2>
 Used technologies
 </h2>
-In the project
-the following technologies are used: React, Redux Toolkit, axios, Rest API. Used backend <a href='https://connections-api.herokuapp.com/docs/#/' target="_blank">herokuapp</a>
+
+## In the project the following technologies are used: React, Redux Toolkit, axios, Rest API. Used backend <a href='https://connections-api.herokuapp.com/docs/#/' target="_blank">herokuapp</a>
 
 <p align="center">
 <img src="https://media.tproger.ru/uploads/2016/10/reactmini.png" width="50%"></p>
@@ -20,6 +20,8 @@ the following technologies are used: React, Redux Toolkit, axios, Rest API. Used
 
 # Project functionality
 
-In `home page` you can: sign up or login in site ![Home_page](./assets/home.png)
+## In `home page` you can: sign up or login in site
+
+![Home_page](./assets/home.png)
 
 `Registration` page ![Home_page](./assets/sign_up.png)
