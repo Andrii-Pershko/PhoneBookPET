@@ -1,9 +1,9 @@
 # React "Phone Book" pet project
 
-Еhis project was created to demonstrate technical training in react and the
+This project was created to demonstrate technical training in react and the
 ability to do registration and login on the site.
 
-<h2 align="center">
+<h2>
 In the project
 the following technologies are used: React, Redux Toolkit, axios, Rest API. Used backend <a href='https://connections-api.herokuapp.com/docs/#/' target="_blank">herokuapp</a>
 </h2>
