@@ -5,9 +5,10 @@ import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
+import { useState } from 'react';
 
 Notiflix.Notify.init({
-  timeout: 1000,
+  timeout: 2000,
 });
 
 // initial значення для бібліотеки formik
@@ -31,24 +32,27 @@ let userSchema = object().shape({
 export function ContactForm() {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+  const [loadingButton, setLoadingButton] = useState(false);
 
-  const handleSubmit = ({ name, number }, action) => {
+  const handleSubmit = async ({ name, number }, action) => {
+    setLoadingButton(true);
     if (name.length > 25) {
       alert('The length of the name should not exceed 25 characters');
+      setLoadingButton(false);
       return;
     }
     //якщо імя повторюється випливає попередження
     if (contacts.find(contact => contact.name === name) !== undefined) {
       Notiflix.Notify.failure(`${name} already in your contact book`);
+      setLoadingButton(false);
       return;
     }
 
-    dispatch(addContact({ name, number }));
-    // якщо не повторюється додаємо та робимо алерт про новий контакт
+    await dispatch(addContact({ name, number }));
 
     Notiflix.Notify.success(`You added ${name} to phonebook`);
-    //скидання полів форми
     action.resetForm();
+    setLoadingButton(false);
   };
 
   return (
@@ -80,7 +84,9 @@ export function ContactForm() {
           <ErrorMessage component="p" className={css.nameError} name="number" />
         </label>
 
-        <button type="submit">Add contact</button>
+        <button type="submit">
+          {loadingButton ? 'loading...' : 'Add contact'}
+        </button>
       </Form>
     </Formik>
   );

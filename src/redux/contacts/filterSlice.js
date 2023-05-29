@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { filterInitialState } from 'redux/initialState';
 
-// ініцілюємо стартове значення фільтру
-const filterInitialState = '';
 
-// створюємо slice для фільтру контактів
 const filterSlice = createSlice({
   name: 'filter',
   initialState: filterInitialState,

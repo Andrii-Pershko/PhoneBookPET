@@ -8,14 +8,11 @@ import {
   handlePending,
   handleRejected,
 } from './sliceFunctions';
+import { stateContacts } from 'redux/initialState';
 
 const phonebookSlice = createSlice({
   name: 'contacts',
-  initialState: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
+  initialState: stateContacts,
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.fulfilled, fetchContactsFulfilled)

@@ -9,18 +9,11 @@ import {
   refreshUsersReject,
   registerFulfilled,
 } from './sliceFunctions';
-
-const initialState = {
-  user: { name: null, email: null },
-  token: null,
-  isLoggedIn: false,
-  isRefreshing: true,
-  error: false,
-};
+import { initialStateAuth } from 'redux/initialState';
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialStateAuth,
   extraReducers: builder => {
     builder
       .addCase(refreshUser.fulfilled, refreshUsersFulfilled)
