@@ -19,4 +19,6 @@ the following technologies are used: React, Redux Toolkit, axios, Rest API. Used
 
 # Project functionality
 
-`Home page` ![Home_page](./assets/home.png)
+In `home page` you can: sign up or login in site ![Home_page](./assets/home.png)
+
+`Registration` page ![Home_page](./assets/sign_up.png)
